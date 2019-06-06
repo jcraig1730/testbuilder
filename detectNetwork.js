@@ -21,6 +21,12 @@ var detectNetwork = function(cardNumber) {
   if (cardLength === 15 && (cardPrefix === 34 || cardPrefix === 37)){
     return "American Express"
   }
+  if ((cardLength === 13 || cardLength === 16 || cardLength === 19) && cardNumber[0] === "4"){
+    return "Visa"
+  }
+  if (cardLength === 16 && (cardPrefix >= 51 && cardPrefix <= 55)){
+    return "MasterCard"
+  }
 };
 
 
