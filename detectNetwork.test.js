@@ -253,7 +253,6 @@ describe('Switch', function() {
           while (num.length < length) {
             num += Math.floor(Math.random() * 10).toString();
           }
-          console.log(num);
           expect(detectNetwork(num)).to.equal('Switch');
         }
       );
