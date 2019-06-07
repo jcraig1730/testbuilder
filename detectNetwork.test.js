@@ -229,7 +229,7 @@ describe('China UnionPay', function() {
   }
   for (let i = 6282; i < 6289; i++) {
     for (let j = 16; j < 20; j++) {
-      it('has a prefix of ' + i + ' a length of ' + j, function() {
+      it('has a prefix of ' + i + ' and a length of ' + j, function() {
         let num = i.toString();
         while (num.length < j) {
           num += Math.floor(Math.random() * 10).toString();
@@ -238,4 +238,25 @@ describe('China UnionPay', function() {
       });
     }
   }
+});
+
+describe('Switch', function() {
+  let expect = chai.expect;
+  let prefixes = [4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759];
+  let lengths = [16, 18, 19];
+  prefixes.forEach(function(prefix) {
+    lengths.forEach(function(length) {
+      it(
+        'has a prefix of ' + prefix + ' and a length of ' + length,
+        function() {
+          let num = prefix.toString();
+          while (num.length < length) {
+            num += Math.floor(Math.random() * 10).toString();
+          }
+          console.log(num);
+          expect(detectNetwork(num)).to.equal('Switch');
+        }
+      );
+    });
+  });
 });
