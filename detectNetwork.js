@@ -18,6 +18,14 @@ var detectNetwork = function(cardNumber) {
   let cardPrefix4Digit = Number(cardNumber.slice(0, 4));
   let cardPrefix6Digit = Number(cardNumber.slice(0, 6));
   let cardLength = cardNumber.length;
+
+  if (
+    ([564182, 633110].includes(cardPrefix6Digit) ||
+      [4903, 4905, 4911, 4936, 6333, 6759].includes(cardPrefix4Digit)) &&
+    [16, 18, 19].includes(cardLength)
+  ) {
+    return 'Switch';
+  }
   if (
     cardLength === 14 &&
     (cardPrefix2Digit === 38 || cardPrefix2Digit === 39)
