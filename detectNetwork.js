@@ -13,20 +13,32 @@ var detectNetwork = function(cardNumber) {
   // The American Express network always starts with a 34 or 37 and is 15 digits long
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
-  let cardPrefix = Number(cardNumber.slice(0, 2));
+  let cardPrefix2Digit = Number(cardNumber.slice(0, 2));
+  let cardPrefix4Digit = Number(cardNumber.slice(0, 4));
   let cardLength = cardNumber.length
-  if (cardLength === 14 && (cardPrefix === 38 || cardPrefix === 39)){
-    return "Diner's Club"
+  if (cardLength === 14 && (cardPrefix2Digit === 38 || cardPrefix2Digit === 39)){
+    return "Diner's Club";
   }
-  if (cardLength === 15 && (cardPrefix === 34 || cardPrefix === 37)){
-    return "American Express"
+  if (cardLength === 15 && (cardPrefix2Digit === 34 || cardPrefix2Digit === 37)){
+    return "American Express";
   }
   if ((cardLength === 13 || cardLength === 16 || cardLength === 19) && cardNumber[0] === "4"){
-    return "Visa"
+    return "Visa";
   }
-  if (cardLength === 16 && (cardPrefix >= 51 && cardPrefix <= 55)){
-    return "MasterCard"
+  if (cardLength === 16 && (cardPrefix2Digit >= 51 && cardPrefix2Digit <= 55)){
+    return "MasterCard";
+  }
+  if ((cardLength === 16 || cardLength === 19) && (cardPrefix4Digit === 6011 || (Number(cardNumber.slice(0, 3)) >= 644 && Number(cardNumber.slice(0, 3)) <= 649 ) || cardPrefix2Digit === 65)){
+    return "Discover";
+  }
+  let maestroPrefixes = [5018, 5020, 5038, 5893, 6304, 6759, 6761, 6762, 6763];
+  if (maestroPrefixes.includes(cardPrefix4Digit) && (cardLength >= 12 && cardLength <= 19)){
+    return "Maestro"
   }
 };
+
+
+// 5018, 5020, 5038, 5893, 6304, 6759, 6761, 6762, 6763
+// length 16-19
 
 
